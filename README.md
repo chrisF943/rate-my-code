@@ -78,9 +78,11 @@ Looking for installed agents…
 Install rate-my-code into 3 tool(s)? [Y/n]
 ```
 
-**Claude Code gets the real plugin**, not loose files — the installer registers this
-checkout as a marketplace and installs from it, so the skills arrive as `/rate-my-code`,
-`/rate-my-pr` and so on, and `git pull` updates them in place. Every other tool reads the
+**Claude Code gets the real plugin**, not loose files — the installer registers
+`chrisF943/rate-my-code` as a marketplace and installs from it, so the skills arrive as
+`/rate-my-code`, `/rate-my-pr` and so on, and `/plugin marketplace update rate-my-code`
+pulls new versions. (Working on the skills themselves? `--local` registers your checkout
+instead, so unpushed edits load.) Every other tool reads the
 same `SKILL.md` format, so there the installer copies the six skills into the directory that
 tool scans.
 
@@ -108,6 +110,7 @@ Run `./install.sh --dry-run` first if you want to see the plan without writing a
 | `--project` | Install into the current repo instead of your home directory |
 | `--dir PATH` | Install into an explicit directory, for a tool not listed above |
 | `--skills-only` | Copy skills into `~/.claude/skills` instead of installing the plugin |
+| `--local` | Register the Claude marketplace from your checkout rather than GitHub |
 | `--dry-run` | Show what would happen, change nothing |
 | `--uninstall` | Remove the plugin and the six skills everywhere they were installed |
 | `-y`, `--yes` | Skip the confirmation prompt |

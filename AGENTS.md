@@ -66,6 +66,10 @@ work in Codex, Gemini CLI, Cursor, Warp, OpenCode, Qwen Code, Cline and Droid.
 
 ## Before you open a PR
 
+Editing a skill and testing it in Claude Code? Install with `./install.sh --tool claude
+--local`. The default registers the marketplace from `chrisF943/rate-my-code`, which means
+a plain `./install.sh` loads the *pushed* skills and your local edits do nothing.
+
 ```bash
 ./scripts/check.sh          # frontmatter, JSON, version sync, shellcheck if present
 ./install.sh --dry-run      # detection and destinations, writes nothing

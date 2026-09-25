@@ -14,6 +14,7 @@ REPO_ROOT="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
 SRC_DIR="$REPO_ROOT/skills"
 PLUGIN_NAME=rate-my-code
 MARKETPLACE_NAME=rate-my-code
+MARKETPLACE_REPO=chrisF943/rate-my-code
 
 TOOLS=(claude codex gemini antigravity warp opencode cursor qwen cline droid)
 
@@ -22,6 +23,7 @@ DRY_RUN=0
 UNINSTALL=0
 ASSUME_YES=0
 SKILLS_ONLY=0
+LOCAL_SOURCE=0
 EXPLICIT_DIR=""
 REQUESTED=()
 
@@ -52,6 +54,8 @@ Options:
   --project      Install into the current directory instead of your home directory
   --dir PATH     Install into an explicit skills directory, for a tool not listed
   --skills-only  Copy skills into ~/.claude/skills instead of installing the plugin
+  --local        Register the Claude marketplace from this checkout instead of GitHub,
+                 so edits to skills/ take effect without pushing (for authoring)
   --dry-run      Print what would happen and change nothing
   --uninstall    Remove rate-my-code from the detected or named destinations
   -y, --yes      Skip the confirmation prompt
@@ -62,6 +66,7 @@ Examples:
   ./install.sh --dry-run               # see what detection found, change nothing
   ./install.sh --tool codex
   ./install.sh --tool cursor,opencode --project
+  ./install.sh --tool claude --local     # develop against the working copy
   ./install.sh --uninstall
   ./install.sh --dir ~/.config/some-agent/skills
 EOF
@@ -184,14 +189,33 @@ sync_skills() {
   done
 }
 
-# Claude Code's native path: register this checkout as a marketplace, install the plugin.
+# Where the rate-my-code marketplace is currently registered from, empty if it is not.
+claude_marketplace_source() {
+  claude plugin marketplace list 2>/dev/null | awk -v name="$MARKETPLACE_NAME" '
+    $2 == name { hit = 1; next }
+    hit && $1 == "Source:" { sub(/^[^(]*\(/, ""); sub(/\)[[:space:]]*$/, ""); print; exit }
+  '
+}
+
+# Claude Code's native path: register the marketplace, then install the plugin from it.
+# Default source is the published repo, matching how every other pack is listed;
+# --local points it at this checkout so unpushed edits load.
 install_claude_plugin() {
-  if claude plugin marketplace list 2>/dev/null | grep -q "$MARKETPLACE_NAME"; then
-    echo "    marketplace $MARKETPLACE_NAME already registered — updating"
+  local source=$MARKETPLACE_REPO
+  [ $LOCAL_SOURCE -eq 1 ] && source=$REPO_ROOT
+  local current
+  current=$(claude_marketplace_source)
+  if [ -z "$current" ]; then
+    echo "    register marketplace from $source"
+    run claude plugin marketplace add "$source" --scope user
+  elif [ "$current" = "$source" ]; then
+    echo "    marketplace $MARKETPLACE_NAME already registered from $source — updating"
     run claude plugin marketplace update "$MARKETPLACE_NAME"
   else
-    echo "    register marketplace from $REPO_ROOT"
-    run claude plugin marketplace add "$REPO_ROOT" --scope user
+    echo "    marketplace $MARKETPLACE_NAME points at $current — re-registering from $source"
+    claude plugin list 2>/dev/null | grep -q "$PLUGIN_NAME" && run claude plugin uninstall "$PLUGIN_NAME"
+    run claude plugin marketplace remove "$MARKETPLACE_NAME"
+    run claude plugin marketplace add "$source" --scope user
   fi
   echo "    install plugin $PLUGIN_NAME"
   run claude plugin install "$PLUGIN_NAME@$MARKETPLACE_NAME"
@@ -243,6 +267,7 @@ while [ $# -gt 0 ]; do
     --project)     SCOPE=project; shift ;;
     --global)      SCOPE=global; shift ;;
     --skills-only) SKILLS_ONLY=1; shift ;;
+    --local)       LOCAL_SOURCE=1; shift ;;
     --dry-run)     DRY_RUN=1; shift ;;
     --uninstall)   UNINSTALL=1; shift ;;
     -y|--yes)      ASSUME_YES=1; shift ;;
