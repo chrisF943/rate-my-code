@@ -37,6 +37,19 @@ Every finding gets an ID, so fixing is a conversation:
 
 ---
 
+## Why I built this
+
+Ask an AI to review your code and you get a wall of prose — *this is good, fix that, consider
+this.* It's often correct, but it's unanchored. There's no scale behind it, so you never find
+out where your code actually lands: is this a solid codebase with a few rough edges, or a
+shaky one that happens to run? Ask twice and you get two different answers.
+
+Rate My Code puts a number on it and then shows its work. You see the score, the category it
+came from, the evidence that produced it, and the specific findings holding it down — then
+you can have the agent fix them and watch the score move.
+
+---
+
 ## The skills
 
 | Skill | Rates | Categories |
