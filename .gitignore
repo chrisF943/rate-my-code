@@ -1,0 +1,4 @@
+.DS_Store
+
+# Scorecards produced by the skills when they are run on this repo
+.rate-my-code/

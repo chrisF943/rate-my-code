@@ -1,0 +1,21 @@
+{
+  "name": "rate-my-code",
+  "displayName": "Rate My Code",
+  "description": "Grades your code, PRs, docs, tests, and security on a 1-5 star scale, then fixes what it found.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Chris Faris"
+  },
+  "homepage": "https://github.com/chrisF943/rate-my-code",
+  "repository": "https://github.com/chrisF943/rate-my-code",
+  "license": "MIT",
+  "keywords": [
+    "code-review",
+    "code-quality",
+    "security",
+    "documentation",
+    "testing",
+    "scorecard"
+  ],
+  "skills": "./skills/"
+}

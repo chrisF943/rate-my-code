@@ -1,0 +1,38 @@
+{
+  "name": "rate-my-code",
+  "version": "0.1.0",
+  "description": "Grades your code, PRs, docs, tests, and security on a 1-5 star scale with evidence-backed findings, then applies the fixes to raise the score.",
+  "author": {
+    "name": "Chris Faris",
+    "url": "https://github.com/chrisF943"
+  },
+  "homepage": "https://github.com/chrisF943/rate-my-code",
+  "repository": "https://github.com/chrisF943/rate-my-code",
+  "license": "MIT",
+  "keywords": [
+    "code-review",
+    "code-quality",
+    "security",
+    "documentation",
+    "testing",
+    "scorecard"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Rate My Code",
+    "shortDescription": "A 1-5 star scorecard for your code, PRs, docs, tests and security",
+    "longDescription": "Rate My Code reviews a codebase the way a reviewer would: it runs your project's own lint, typecheck, test and audit commands, scores six categories out of five stars against published anchors, and reports findings that each cite a file and line. Nothing is rounded up to be encouraging, and hard caps override the arithmetic. Every finding gets an ID so you can say \"fix SEC-01\" and have the fixer apply it, verify it and re-rate.",
+    "developerName": "Chris Faris",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Rate my code.",
+      "Rate this PR before I merge it."
+    ],
+    "websiteURL": "https://github.com/chrisF943/rate-my-code",
+    "brandColor": "#F5A623"
+  }
+}

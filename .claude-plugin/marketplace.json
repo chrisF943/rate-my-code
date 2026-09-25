@@ -1,0 +1,28 @@
+{
+  "name": "rate-my-code",
+  "description": "Star-rating code review skills for AI coding agents",
+  "owner": {
+    "name": "Chris Faris"
+  },
+  "plugins": [
+    {
+      "name": "rate-my-code",
+      "description": "Grades your code, PRs, docs, tests, and security on a 1-5 star scale, then fixes what it found.",
+      "version": "0.1.0",
+      "source": "./",
+      "homepage": "https://github.com/chrisF943/rate-my-code",
+      "license": "MIT",
+      "category": "Developer Tools",
+      "author": {
+        "name": "Chris Faris"
+      },
+      "keywords": [
+        "code-review",
+        "quality",
+        "security",
+        "rating",
+        "scorecard"
+      ]
+    }
+  ]
+}

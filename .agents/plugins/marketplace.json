@@ -1,0 +1,19 @@
+{
+  "name": "rate-my-code",
+  "interface": {
+    "displayName": "Rate My Code"
+  },
+  "plugins": [
+    {
+      "name": "rate-my-code",
+      "source": {
+        "source": "url",
+        "url": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
