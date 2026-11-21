@@ -6,7 +6,7 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
-## [0.1.0] — unreleased
+## [0.1.0] — 2026-11-21
 
 First release.
 
@@ -27,6 +27,9 @@ First release.
   gets the native plugin via its CLI; other harnesses get the skills copied into the
   directory they scan. Supports `--tool`, `--dir`, `--project`, `--skills-only`,
   `--dry-run`, `--uninstall` and `-y`.
+- Raters ask before running tests, builds or scripts in a repository the user did not
+  write, and fall back to a static review if they decline.
+- CI runs `./scripts/check.sh`, including shellcheck, on every push and pull request.
 - Manifests for Claude Code (`.claude-plugin/`), the `.agents` cross-harness standard
   (`.agents/plugins/`), Codex (`.codex-plugin/`) and Cursor (`.cursor-plugin/`).
 
