@@ -55,6 +55,16 @@ Keep the body harness-neutral: no `Task`/`TodoWrite`/`Bash` tool names, no
 `~/.claude` paths, no "Claude" in instructions the agent will follow. The same file has to
 work in Codex, Gemini CLI, Cursor, Warp, OpenCode, Qwen Code, Cline and Droid.
 
+### Shared blocks
+
+Text between `<!-- shared:NAME -->` and `<!-- /shared:NAME -->` must be identical in every
+`rate-my-*` skill, and `./scripts/check.sh` fails if it is not. Edit one copy, then paste it
+into the others.
+
+The `history` block holds the rubric version. Bump it in every rater whenever any rater's
+anchors, weights or caps change, so old and new scores are never compared as equals. Wording
+changes that do not move a score do not bump it.
+
 ## Adding support for a new harness
 
 1. Add its detection and destination to `install.sh` (`detect_reason`, `dest_for`,

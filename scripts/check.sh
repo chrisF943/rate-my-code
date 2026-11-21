@@ -81,6 +81,33 @@ PY
 done
 
 echo
+echo "Shared blocks"
+if report=$(python3 - 2>&1 <<'PY'
+import glob, re, sys
+raters = sorted(glob.glob("skills/rate-my-*/SKILL.md"))
+block = re.compile(r"<!-- shared:([a-z-]+) -->\n(.*?)\n<!-- /shared:\1 -->", re.S)
+found = {}
+for path in raters:
+    for name, body in block.findall(open(path, encoding="utf-8").read()):
+        found.setdefault(name, {})[path] = body
+problems = []
+for name, copies in sorted(found.items()):
+    missing = [p for p in raters if p not in copies]
+    if missing:
+        problems.append(f"{name} missing from {', '.join(missing)}")
+    if len(set(copies.values())) > 1:
+        problems.append(f"{name} differs between raters")
+if problems:
+    sys.exit("; ".join(problems))
+print(", ".join(f"{n} x{len(c)}" for n, c in sorted(found.items())))
+PY
+); then
+  note "ok    $report"
+else
+  bad "$report"
+fi
+
+echo
 echo "Installer"
 bash -n install.sh && note "ok    install.sh parses"
 if command -v shellcheck >/dev/null 2>&1; then
