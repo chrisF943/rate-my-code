@@ -12,9 +12,11 @@ a weighted overall score, and a list of **specific, ID'd improvements** the user
 only its own report and history row under `.rate-my-code/`. Fixing is a separate, explicit
 step (see [Hand off](#7-hand-off)).
 
+<!-- shared:untrusted-code -->
 **Untrusted code:** running a project's tests, build, or scripts executes that project's
 code. If the user did not write the repository or does not trust it, ask before running
 anything. Without a yes, review statically and list the skipped checks in the report.
+<!-- /shared:untrusted-code -->
 
 ---
 
@@ -231,13 +233,26 @@ Render half stars as `★★★½☆`.
 
 ## 6b. Persist the score
 
-- Write the full report to `.rate-my-code/code-report.md` (overwrite any previous one).
-- Append one row to `.rate-my-code/history.md`, creating it with this header if absent:
+Write the full report to `.rate-my-code/code-report.md` (overwrite any previous one).
+
+<!-- shared:history -->
+Append one row to `.rate-my-code/history.md`, creating the file with this header if it is
+missing:
 
 ```markdown
-| Date | Type | Overall | Detail | Commit |
-|---|---|---|---|---|
-| 2026-02-14 | code | 3.0 | QUA 3 · ARC 4 · SEC 2 · BP 3 · TST 2 · DOC 4 | a1b2c3d |
+| Date | Type | Overall | Detail | Commit | Rubric |
+|---|---|---|---|---|---|
+```
+
+Fill Rubric with `1`, the version of the scoring rubric. Only rows with the same rubric are
+comparable. If the existing header has no Rubric column, add it to the header and separator
+rows. Never rewrite past rows.
+<!-- /shared:history -->
+
+Example row:
+
+```markdown
+| 2026-02-14 | code | 3.0 | QUA 3 · ARC 4 · SEC 2 · BP 3 · TST 2 · DOC 4 | a1b2c3d | 1 |
 ```
 
 History is what makes the score meaningful over time — always append, never rewrite past

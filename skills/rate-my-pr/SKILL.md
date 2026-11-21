@@ -12,9 +12,11 @@ move on.
 **This skill never edits code.** It writes only its own report and history row under
 `.rate-my-code/`. Fixing is a separate step (see [Hand off](#6-hand-off)).
 
+<!-- shared:untrusted-code -->
 **Untrusted code:** running a project's tests, build, or scripts executes that project's
 code. If the user did not write the repository or does not trust it, ask before running
 anything. Without a yes, review statically and list the skipped checks in the report.
+<!-- /shared:untrusted-code -->
 
 ## 1. Get the diff
 
@@ -106,9 +108,21 @@ CI results are available via `gh pr checks`, read them rather than guessing.
 
 ## 5. Report
 
-Print the scorecard, then save it to `.rate-my-code/pr-report.md` and append a row to
-`.rate-my-code/history.md` (create with the header
-`| Date | Type | Overall | Detail | Commit |` if missing).
+Print the scorecard and save it to `.rate-my-code/pr-report.md`.
+
+<!-- shared:history -->
+Append one row to `.rate-my-code/history.md`, creating the file with this header if it is
+missing:
+
+```markdown
+| Date | Type | Overall | Detail | Commit | Rubric |
+|---|---|---|---|---|---|
+```
+
+Fill Rubric with `1`, the version of the scoring rubric. Only rows with the same rubric are
+comparable. If the existing header has no Rubric column, add it to the header and separator
+rows. Never rewrite past rows.
+<!-- /shared:history -->
 
 ```markdown
 # Rate My PR — #482 "Add refund flow"

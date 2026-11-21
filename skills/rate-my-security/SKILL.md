@@ -11,9 +11,11 @@ by how alarming they sound.
 **This skill never edits code.** It writes only its own report and history row under
 `.rate-my-code/`. Fixing is a separate step (see [Hand off](#7-hand-off)).
 
+<!-- shared:untrusted-code -->
 **Untrusted code:** running a project's tests, build, or scripts executes that project's
 code. If the user did not write the repository or does not trust it, ask before running
 anything. Without a yes, review statically and list the skipped checks in the report.
+<!-- /shared:untrusted-code -->
 
 **State this limitation in every report:** this is a static review by an AI reading source
 code. It finds common, real classes of vulnerability. It is not a penetration test, it does
@@ -120,9 +122,21 @@ evidence of ongoing practice: dependency scanning, secret scanning, and security
 
 ## 5. Report
 
-Print the scorecard, save it to `.rate-my-code/security-report.md`, and append a row to
-`.rate-my-code/history.md` (create with the header
-`| Date | Type | Overall | Detail | Commit |` if missing).
+Print the scorecard and save it to `.rate-my-code/security-report.md`.
+
+<!-- shared:history -->
+Append one row to `.rate-my-code/history.md`, creating the file with this header if it is
+missing:
+
+```markdown
+| Date | Type | Overall | Detail | Commit | Rubric |
+|---|---|---|---|---|---|
+```
+
+Fill Rubric with `1`, the version of the scoring rubric. Only rows with the same rubric are
+comparable. If the existing header has no Rubric column, add it to the header and separator
+rows. Never rewrite past rows.
+<!-- /shared:history -->
 
 ```markdown
 # Rate My Security — <project name>

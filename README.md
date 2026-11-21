@@ -216,11 +216,14 @@ Each run writes its report to `.rate-my-code/` and appends one row to
 `.rate-my-code/history.md`:
 
 ```markdown
-| Date | Type | Overall | Detail | Commit |
-|---|---|---|---|---|
-| 2026-02-14 | code | 3.0 | QUA 3 · ARC 4 · SEC 2 · BP 3 · TST 2 · DOC 4 | a1b2c3d |
-| 2026-02-14 | code | 3.5 | QUA 4 · ARC 4 · SEC 4 · BP 3 · TST 3 · DOC 4 | 9e8d7c6 |
+| Date | Type | Overall | Detail | Commit | Rubric |
+|---|---|---|---|---|---|
+| 2026-02-14 | code | 3.0 | QUA 3 · ARC 4 · SEC 2 · BP 3 · TST 2 · DOC 4 | a1b2c3d | 1 |
+| 2026-02-14 | code | 3.5 | QUA 4 · ARC 4 · SEC 4 · BP 3 · TST 3 · DOC 4 | 9e8d7c6 | 1 |
 ```
+
+The Rubric column records which version of the scoring rules produced the row. It changes
+only when anchors, weights or caps change, so you know which scores are comparable.
 
 Commit that folder to track the trend over time, or add it to `.gitignore` to keep it local.
 This repo ignores it by default.
