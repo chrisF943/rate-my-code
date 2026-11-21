@@ -61,8 +61,13 @@ you can have the agent fix them and watch the score move.
 | **`rate-my-security`** | Security posture | secrets · injection · authn/authz · dependencies · data protection · hardening |
 | **`boost-my-score`** | *(the fixer)* | Applies findings by ID, verifies each change, re-rates and shows the delta |
 
-The five `rate-my-*` skills are **read-only**. They measure and report; they never touch
-your code. Only `boost-my-score` edits anything, and only after you pick a batch.
+The five `rate-my-*` skills never edit your code. They measure and report, and the only
+files they write are their own reports in `.rate-my-code/`. Only `boost-my-score` edits
+code, and only after you pick a batch.
+
+Gathering evidence means running your tests, build, and lint, which executes the project's
+code. On a repository you didn't write, the raters ask before running anything and fall
+back to a static review if you say no.
 
 ## Install
 

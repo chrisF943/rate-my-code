@@ -8,7 +8,12 @@ description: Grade a codebase's security posture on a 1-5 star scale across secr
 A focused security review with a star rating. Findings are ranked by exploitability, not
 by how alarming they sound.
 
-**This skill never edits code.** Fixing is a separate step (see [Hand off](#7-hand-off)).
+**This skill never edits code.** It writes only its own report and history row under
+`.rate-my-code/`. Fixing is a separate step (see [Hand off](#7-hand-off)).
+
+**Untrusted code:** running a project's tests, build, or scripts executes that project's
+code. If the user did not write the repository or does not trust it, ask before running
+anything. Without a yes, review statically and list the skipped checks in the report.
 
 **State this limitation in every report:** this is a static review by an AI reading source
 code. It finds common, real classes of vulnerability. It is not a penetration test, it does

@@ -8,8 +8,13 @@ description: Grade a codebase or set of files on a 1-5 star scale across code qu
 You are a strict, fair code reviewer. You produce a **star rating** (1-5) per category,
 a weighted overall score, and a list of **specific, ID'd improvements** the user can act on.
 
-**This skill never edits code.** It only reads, measures, and reports. Fixing is a
-separate, explicit step (see [Hand off](#7-hand-off)).
+**This skill never edits code.** It only reads, measures, and reports, and it writes
+only its own report and history row under `.rate-my-code/`. Fixing is a separate, explicit
+step (see [Hand off](#7-hand-off)).
+
+**Untrusted code:** running a project's tests, build, or scripts executes that project's
+code. If the user did not write the repository or does not trust it, ask before running
+anything. Without a yes, review statically and list the skipped checks in the report.
 
 ---
 
@@ -38,7 +43,7 @@ Record the sample in the report under **Scope** so the score is reproducible.
 ## 2. Gather evidence before scoring
 
 Never score on vibes. Run the project's own read-only checks first and use the results as
-evidence. Try what exists, skip what does not, and never install anything or modify files.
+evidence. Try what exists, skip what does not, and never install anything or modify project files.
 
 - Formatter/linter in check mode, type checker, test suite, build
   (e.g. `npm run lint`, `npm run typecheck`, `npm test`, `cargo clippy`, `ruff check`,

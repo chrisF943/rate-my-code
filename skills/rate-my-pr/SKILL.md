@@ -9,7 +9,12 @@ Grade a change, not a codebase. The question is **"should this merge?"**, not "i
 repo good?". Pre-existing debt the PR merely touches is not the PR's fault — say so and
 move on.
 
-**This skill never edits code.** Fixing is a separate step (see [Hand off](#6-hand-off)).
+**This skill never edits code.** It writes only its own report and history row under
+`.rate-my-code/`. Fixing is a separate step (see [Hand off](#6-hand-off)).
+
+**Untrusted code:** running a project's tests, build, or scripts executes that project's
+code. If the user did not write the repository or does not trust it, ask before running
+anything. Without a yes, review statically and list the skipped checks in the report.
 
 ## 1. Get the diff
 

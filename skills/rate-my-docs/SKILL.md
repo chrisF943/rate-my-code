@@ -9,7 +9,12 @@ Grade documentation by whether it **works for a reader**, not by how much of it 
 The decisive test: could a competent developer who has never seen this project get it
 running and make a change, using only the docs?
 
-**This skill never edits code or docs.** Fixing is a separate step (see [Hand off](#6-hand-off)).
+**This skill never edits code or docs.** It writes only its own report and history row under
+`.rate-my-code/`. Fixing is a separate step (see [Hand off](#6-hand-off)).
+
+**Untrusted code:** running a project's tests, build, or scripts executes that project's
+code. If the user did not write the repository or does not trust it, ask before running
+anything. Without a yes, review statically and list the skipped checks in the report.
 
 ## 1. Inventory what exists
 

@@ -9,7 +9,12 @@ Grade a test suite by the only thing that matters: **would it catch a real regre
 before it reaches production?** Coverage percentage is a weak proxy — a suite at 90%
 coverage that asserts nothing scores 1 star here.
 
-**This skill never edits code.** Fixing is a separate step (see [Hand off](#6-hand-off)).
+**This skill never edits code.** It writes only its own report and history row under
+`.rate-my-code/`. Fixing is a separate step (see [Hand off](#6-hand-off)).
+
+**Untrusted code:** running a project's tests, build, or scripts executes that project's
+code. If the user did not write the repository or does not trust it, ask before running
+anything. Without a yes, review statically and list the skipped checks in the report.
 
 ## 1. Map the suite
 
