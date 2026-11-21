@@ -24,6 +24,19 @@ In order of preference:
 
 1. A PR number or URL the user gave — fetch it with `gh pr view <n> --json title,body,files,commits`
    and `gh pr diff <n>` (or the GitLab/Bitbucket equivalent).
+
+   **No `gh`, or not logged in?** Use another GitHub integration you have if one exists.
+   Otherwise fetch the PR head with plain git, which needs no login for a repo you can
+   already pull:
+
+   ```bash
+   git fetch origin pull/<n>/head        # GitLab: merge-requests/<n>/head
+   git diff $(git merge-base origin/<default-branch> FETCH_HEAD) FETCH_HEAD
+   git log --oneline origin/<default-branch>..FETCH_HEAD
+   ```
+
+   The PR title, description and CI status do not come with git. Ask the user to paste the
+   description, and report both as "not available" rather than guessing them.
 2. The current branch: `git diff $(git merge-base HEAD origin/main)...HEAD` — detect the
    real default branch rather than assuming `main`.
 3. Uncommitted work: `git diff HEAD`.
@@ -104,7 +117,8 @@ Whole stars per category; overall is the weighted average to the nearest half st
 
 Where the tooling exists, run it on the branch and use the result as evidence: lint,
 typecheck, the test suite, and the build. Report what actually ran and what it said. If
-CI results are available via `gh pr checks`, read them rather than guessing.
+CI results are available via `gh pr checks`, read them rather than guessing. If they are
+not available, say so in the report.
 
 ## 5. Report
 
@@ -176,4 +190,4 @@ Offer to fix it:
 
 Use the **`boost-my-score`** skill to apply the fixes by ID. If the user asks to post the
 review, use `gh pr review` — but only when they explicitly ask, since that is visible to
-their team.
+their team. Without `gh`, give them the review as Markdown ready to paste.

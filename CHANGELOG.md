@@ -11,6 +11,8 @@ All notable changes to this project are documented here. The format follows
 - `history.md` rows carry a Rubric column, so scores from different versions of the
   scoring rules are not compared as equals. Existing files gain the column on the next run.
 - `./scripts/check.sh` fails when a block marked as shared differs between raters.
+- `rate-my-pr` works without the `gh` CLI: it fetches the PR head with plain git and
+  reports the description and CI status as not available instead of guessing.
 
 ## [0.1.0] — 2026-11-21
 
